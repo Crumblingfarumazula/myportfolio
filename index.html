@@ -1,60 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portafolio</title>
+    <style>
+        /* Aquí va el CSS del carrusel y algunos ajustes básicos */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        header h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .carrusel {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 0 auto 40px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background: #000;
+        }
+        .slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        button.prev, button.next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+        }
+        button.prev { left: 10px; }
+        button.next { right: 10px; }
+        button:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        table {
+            margin: 0 auto 20px auto;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px 20px;
+        }
+    </style>
 </head>
-<header>
-    <h1>Portafolio Juan Pablo Areiza</h1>
+<body>
+    <header>
+        <h1>Portafolio Juan Pablo Areizaga</h1>
+    </header>
+
+    <!-- Aquí empieza el carrusel -->
+    <div class="carrusel">
+        <div class="slides">
+            <div class="slide active">
+                <img src="https://via.placeholder.com/600x400/FF5733/FFFFFF?text=Imagen+1" alt="Imagen 1" />
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x400/33C1FF/FFFFFF?text=Imagen+2" alt="Imagen 2" />
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x400/75FF33/FFFFFF?text=Imagen+3" alt="Imagen 3" />
+            </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+
+    <!-- Aquí están tus tablas con enlaces -->
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <a href="https://github.com/Crumblingfarumuzula/ml_python_moodle_week_1">moodle</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <div>
         <table>
             <tr>
                 <td>
-                    <a href="https://github.com/Crumblingfarumazula/m1_python_moodle_week_1">moodle</a>
-
+                    <a href="https://github.com/Crumblingfarumuzula/ml_python_clase">ml_python_clase</a>
                 </td>
-
-
-
             </tr>
-
-
-
-
-        </table> 
-
-
-
+        </table>
     </div>
 
-   
- <div>
-        <table>
-            <tr>
-                <td>
-                    <a href="https://github.com/Crumblingfarumazula/m1_python_clase">m1_python_clase</a>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        let index = 0;
 
-                </td>
+        function showSlide(i) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[i].classList.add('active');
+        }
 
+        prev.addEventListener('click', () => {
+            index--;
+            if(index < 0) index = slides.length - 1;
+            showSlide(index);
+        });
 
+        next.addEventListener('click', () => {
+            index++;
+            if(index >= slides.length) index = 0;
+            showSlide(index);
+        });
 
-            </tr>
-
-
-
-
-        </table> 
-
-
-
-    </div>
-
-
-    </div>
-</header>
-<body>
-    
+        // Mostrar la primera imagen al cargar
+        showSlide(index);
+    </script>
 </body>
 </html>
